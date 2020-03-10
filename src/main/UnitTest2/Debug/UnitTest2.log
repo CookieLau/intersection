@@ -1,0 +1,7 @@
+﻿  pch.cpp
+  UnitTest2.cpp
+    正在创建库 E:\Junior2NoSync\SoftwareEngineering\first_expr\intersection\src\main\Debug\UnitTest2.lib 和对象 E:\Junior2NoSync\SoftwareEngineering\first_expr\intersection\src\main\Debug\UnitTest2.exp
+UnitTest2.obj : error LNK2019: 无法解析的外部符号 "public: __thiscall Intersection::Intersection(void)" (??0Intersection@@QAE@XZ)，该符号在函数 "public: void __thiscall UnitTest2::UnitTest2::TestMethod1(void)" (?TestMethod1@UnitTest2@1@QAEXXZ) 中被引用
+UnitTest2.obj : error LNK2019: 无法解析的外部符号 "public: int __thiscall Intersection::getAllPoints(void)" (?getAllPoints@Intersection@@QAEHXZ)，该符号在函数 "public: void __thiscall UnitTest2::UnitTest2::TestMethod1(void)" (?TestMethod1@UnitTest2@1@QAEXXZ) 中被引用
+UnitTest2.obj : error LNK2019: 无法解析的外部符号 "public: int __thiscall Intersection::solveIntersection(void)" (?solveIntersection@Intersection@@QAEHXZ)，该符号在函数 "public: void __thiscall UnitTest2::UnitTest2::TestMethod1(void)" (?TestMethod1@UnitTest2@1@QAEXXZ) 中被引用
+E:\Junior2NoSync\SoftwareEngineering\first_expr\intersection\src\main\Debug\UnitTest2.dll : fatal error LNK1120: 3 个无法解析的外部命令
