@@ -1,4 +1,4 @@
-#include "myIntersection.h"
+#include "Intersection.h"
 
 Intersection::Intersection() {}
 
@@ -30,7 +30,7 @@ int Intersection::getAllPoints() {
 void Intersection::solveLineLineIntersection() {
 	int i, j, n;
 	Vector u, v, w;
-	n = (int) vectors.size();
+	n = (int)vectors.size();
 	for (i = 0; i < n; i++) {
 		for (j = i + 1; j < n; j++) {
 			u = points[i] - points[j];
@@ -45,7 +45,7 @@ void Intersection::solveLineLineIntersection() {
 
 			char type_i = points[i].type;
 			char type_j = points[j].type;
-			
+
 			if (LineIsValid(type_i, t_i) && LineIsValid(type_j, t_j)) { // only when double valid is valid
 				intersects.push_back(points[i] + v * t_i);
 				// intersects.push_back(points[j] + w * t_j); // the same, only for validate t_j
@@ -88,7 +88,7 @@ void Intersection::solveLineCircleIntersection() {
 				continue;
 			}
 			else { // intersect
-				if (dcmp(RM) == 0 && dcmp(PR) !=0) {
+				if (dcmp(RM) == 0 && dcmp(PR) != 0) {
 
 					double PS_l = Length(pr) + radius;
 					double t = PS_l / Length(pq);
@@ -151,16 +151,16 @@ void Intersection::solveCircleCircleIntersection() {
 				continue;
 			}
 			else {
-				status = dcmp(fabs(radius_1-radius_2)-p2q);
+				status = dcmp(fabs(radius_1 - radius_2) - p2q);
 				if (status == 0) { // inside tangency
-					intersects.push_back(p + norm_pq*radius_1);
+					intersects.push_back(p + norm_pq * radius_1);
 				}
 				else if (status > 0) { // inside disjoint
 					continue;
 				}
 				else {
 					// double rad = CalculateAngle(circles[i], circles[j]);
-					double ratio = (radius_1*radius_1 + p2q * p2q - radius_2 * radius_2) / (2 * radius_1*p2q);
+					double ratio = (radius_1 * radius_1 + p2q * p2q - radius_2 * radius_2) / (2 * radius_1 * p2q);
 					if (ratio > 1 - eps) {
 						ratio = 1 - eps;
 					}
@@ -191,7 +191,7 @@ int Intersection::solveIntersection() {
 
 	// ------------------ Delete Duplicates ------------------------
 
-	int size = (int) intersects.size();
+	int size = (int)intersects.size();
 
 	if (isPrintAllIntersections) {
 		cout << "----------------------------------------------------------------------" << endl;
@@ -212,7 +212,7 @@ int Intersection::solveIntersection() {
 		printAllIntersections();
 	}
 
-	return (int) intersects.size();
+	return (int)intersects.size();
 }
 
 
@@ -226,52 +226,4 @@ void Intersection::printAllPoints(vector<Point> v) {
 
 void Intersection::printAllIntersections() {
 	printAllPoints(intersects);
-}
-
-
-int main(int argc, const char** argv) {
-	//FILE* stream1;
-	for (int i = 1; i+1 < argc; i+=2) {
-		const char* path = argv[i + 1];
-		if (argv[i][0]=='-' && argv[i][1]=='i') {
-			//if (freopen_s(&stream1, path, "r", stdin) == NULL) {
-			if (freopen(path, "r", stdin) == NULL) {
-					cout << "File: " << path << " opened filed, exit." << endl;
-				return 0;
-			}
-		}
-		else if (argv[i][0] == '-' && argv[i][1] == 'o') {
-			//if (freopen_s(&stream1, path, "w", stdout) == NULL) {
-			if (freopen(path, "w", stdout) == NULL) {
-					cout << "File: " << path << " opened filed, exit." << endl;
-				return 0;
-			}
-		}
-	}
-
-	Intersection* intersect = new Intersection();
-	if (intersect->getAllPoints() != 0) {
-		return 0; // unexpected quit
-	}
-
-	int ret = intersect->solveIntersection();
-
-	if (hasResultAfter) {
-		int result;
-		cin >> result;
-		if (result == ret) {
-			cout << "Pass" << endl;
-		}
-		else {
-			cout << "Wrong Answer" << endl;
-			intersect->printAllIntersections();
-		}
-	}
-	cout << ret << endl;
-
-
-	fclose(stdin);
-	fclose(stdout);
-
-	return 0;
 }
