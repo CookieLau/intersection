@@ -4,7 +4,7 @@
 
 #include "Shape.h"
 
-class _declspec(dllexport) Intersection {
+class Intersection {
 private:
 	vector<Point> points;
 	vector<Vector> vectors;
