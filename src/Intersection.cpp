@@ -1,6 +1,14 @@
 #include <fstream>
 #include "Intersection.h"
 
+bool isInLimitation(double num) {
+	if (dcmp(num - 100000) < 0 || dcmp(num + 100000) > 0) {
+		return false;
+	}
+	else {
+		return true;
+	}
+}
 
 Intersection::Intersection() {}
 
@@ -12,17 +20,30 @@ int Intersection::getAllPoints(ifstream& in) {
 	for (i = 0; i < n; i++) {
 		in >> type;
 		if (isLine(type)) {
-			in >> x1 >> y1 >> x2 >> y2;
+			if (!(in >> x1 >> y1 >> x2 >> y2)) {
+				fprintf(stderr, "Value error detected in line %d, there are non-numeric characters.\n", i + 1);
+			}
+			if (dcmp(x1 - x2) == 0 && dcmp(y1 - y2) == 0) {
+				fprintf(stderr, "Two points for constructing %c are the same in line %d.\n", type, i + 1);
+			}
+			if (!(isInLimitation(x1) && isInLimitation(y1) && isInLimitation(x2) && isInLimitation(y2))) {
+				fprintf(stderr, "There are numbers out of range (-100000, 100000) at line %d.\n", i + 1);
+			}
 			points.push_back(Point(x1, y1, type));
 			vectors.push_back(Point(x2 - x1, y2 - y1, type)); // whole Length
 		}
 		else if (isCircle(type)) {
-			in >> x1 >> y1 >> radius;
+			if (!(in >> x1 >> y1 >> radius)) {
+				fprintf(stderr, "Value error detected in line %d, there are non-numeric characters.\n", i + 1);
+			}
+			if (!(isInLimitation(x1) && isInLimitation(y1) && isInLimitation(radius))) {
+				fprintf(stderr, "There are numbers out of range (-100000, 100000) at line %d.\n", i + 1);
+			}
 			circles.push_back(Circle(Heart(x1, y1, type), radius));
 			// Radius.push_back(radius);
 		}
 		else {
-			fprintf(stderr, "Type error detected in line %d: type:%c\n", n, type);
+			fprintf(stderr, "Type error detected in line %d: type:%c\n", i + 1, type);
 			return -1;
 		}
 	}
@@ -46,6 +67,13 @@ void Intersection::solveLineLineIntersection() {
 			w = vectors[j];
 			double denominator = Cross(v, w);
 			if (dcmp(denominator) == 0) { // parallel case
+				if (dcmp(Cross(u, v)) == 0) {
+					cout << "Warning: There are infinity interactions for two L/R/S, which have been ignored, ";
+					cout << "point 1: (" << points[i].x << "," << points[i].y << ") ";
+					cout << "vector 1: (" << vectors[i].x << "," << vectors[i].y << ") ";
+					cout << "point 2: (" << points[j].x << "," << points[j].y << ") ";
+					cout << "vector 2: (" << vectors[j].x << "," << vectors[j].y << ")" << endl;
+				}
 				continue;
 			}
 			double t_i = 1.0 * Cross(w, u) / denominator;
@@ -162,6 +190,14 @@ void Intersection::solveCircleCircleIntersection() {
 			double p2q = Length(pq);
 			double radius_1 = circles[i].radius;
 			double radius_2 = circles[j].radius;
+
+			if (dcmp(p.x - q.x) == 0 && dcmp(p.y - q.y) == 0 && dcmp(radius_1 - radius_2) == 0) {
+				cout << "Warning: There are same circles which intersections could be infinity, which have been ignored, ";
+				cout << "x: " << p.x << " ";
+				cout << "y: " << p.y << " ";
+				cout << "r: " << radius_1 << endl;
+				continue;
+			}
 
 			int status = dcmp(p2q - radius_1 - radius_2);
 			if (status == 0) { // outside tangency
