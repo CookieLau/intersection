@@ -1,21 +1,23 @@
+#include <fstream>
 #include "Intersection.h"
+
 
 Intersection::Intersection() {}
 
-int Intersection::getAllPoints() {
+int Intersection::getAllPoints(ifstream& in) {
 	int n, i;
 	double x1, x2, y1, y2, radius;
 	char type;
-	cin >> n;
+	in >> n;
 	for (i = 0; i < n; i++) {
-		cin >> type;
+		in >> type;
 		if (isLine(type)) {
-			cin >> x1 >> y1 >> x2 >> y2;
+			in >> x1 >> y1 >> x2 >> y2;
 			points.push_back(Point(x1, y1, type));
 			vectors.push_back(Point(x2 - x1, y2 - y1, type)); // whole Length
 		}
 		else if (isCircle(type)) {
-			cin >> x1 >> y1 >> radius;
+			in >> x1 >> y1 >> radius;
 			circles.push_back(Circle(Heart(x1, y1, type), radius));
 			// Radius.push_back(radius);
 		}

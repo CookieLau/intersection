@@ -2,7 +2,9 @@
 #ifndef INTERSECTION_H
 #define INTERSECTION_H
 
+#include <fstream>
 #include "Shape.h"
+
 #define DLL_OPTION
 // #define DLL_OPTION _declspec(dllexport)
 
@@ -15,7 +17,7 @@ private:
 	
 public:
 	Intersection();
-	int getAllPoints();
+	int getAllPoints(ifstream& in);
 	void solveLineLineIntersection();
 	void solveLineCircleIntersection();
 	void solveCircleCircleIntersection();
