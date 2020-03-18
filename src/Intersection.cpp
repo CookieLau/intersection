@@ -32,7 +32,13 @@ void Intersection::solveLineLineIntersection() {
 	Vector u, v, w;
 	n = (int)vectors.size();
 	for (i = 0; i < n; i++) {
+		if (!points[i].isExist) {
+			continue;
+		}
 		for (j = i + 1; j < n; j++) {
+			if (!points[j].isExist) {
+				continue;
+			}
 			u = points[i] - points[j];
 			v = vectors[i];
 			w = vectors[j];
@@ -57,7 +63,13 @@ void Intersection::solveLineLineIntersection() {
 void Intersection::solveLineCircleIntersection() {
 	int i, j;
 	for (i = 0; i < (int)vectors.size(); i++) {
+		if (!points[i].isExist) {
+			continue;
+		}
 		for (j = 0; j < (int)circles.size(); j++) {
+			if (!circles[j].isExist) {
+				continue;
+			}
 			Point p = points[i];
 			Vector pq = vectors[i];
 			Circle c = circles[j];
@@ -134,7 +146,13 @@ void Intersection::solveLineCircleIntersection() {
 void Intersection::solveCircleCircleIntersection() {
 	int i, j;
 	for (i = 0; i < (int)circles.size(); i++) {
+		if (!circles[i].isExist) {
+			continue;
+		}
 		for (j = i + 1; j < (int)circles.size(); j++) {
+			if (!circles[j].isExist) {
+				continue;
+			}
 			Heart p = circles[i].center;
 			Heart q = circles[j].center;
 			Vector pq = q - p;
@@ -226,4 +244,13 @@ void Intersection::printAllPoints(vector<Point> v) {
 
 void Intersection::printAllIntersections() {
 	printAllPoints(intersects);
+}
+
+void Intersection::removeVector(int index) {
+	points[index].isExist = false;
+	vectors[index].isExist = false;
+}
+
+void Intersection::removeCircle(int index) {
+	circles[index].isExist = false;
 }

@@ -3,17 +3,28 @@
 const double eps = 1e-12;
 
 // struct Point
-Point::Point(double x, double y, char type) : x(x), y(y), type(type) {}
+Point::Point(double x, double y, char type, bool isExist) : x(x), y(y), type(type), isExist(isExist) {}
 
 bool Point::operator < (const Point& B) const {
 	return (dcmp(x - B.x) < 0 || (dcmp(x - B.x) == 0 && dcmp(y - B.y) < 0));
 }
 
+string Point::getName(void) {
+	return string(1, type) + string("(") + to_string((int)x) + string(",")
+		+ to_string((int)y) + string(")");
+}
+
 // struct Circle
-Circle::Circle(Heart center, double radius) : center(center), radius(radius) {}
+Circle::Circle(Heart center, double radius, bool isExist) : center(center), radius(radius), isExist(isExist){}
 
 Point Circle::point(double angle) {
 	return Point(center.x + cos(angle) * radius, center.y + sin(angle) * radius);
+}
+
+string Circle::getName(void) {
+	return string("C(") + to_string((int)center.x) + string(",")
+		+ to_string((int)center.y) + string(",")
+		+ to_string((int)radius) + string(")");
 }
 
 int dcmp(double x) {

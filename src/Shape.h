@@ -30,13 +30,15 @@ struct Point {
 	// 'R' for ray, with one end
 	// 'S' for segment, with double end
 	char type; 
+	bool isExist;
 
 	// Point(double x = 0.0, double y = 0.0) : x(x), y(y) {}
-	Point(double x = 0.0, double y = 0.0, char type = 'N');
+	Point(double x = 0.0, double y = 0.0, char type = 'N', bool isExist = true);
 	
 	// mention: operator < must obey opposite
 	// A not < B -> B >= A
 	bool operator < (const Point& B) const;
+	string getName(void);
 };
 
 typedef Point Vector;
@@ -45,10 +47,13 @@ typedef Point Heart;
 struct Circle {
 	Heart center;
 	double radius;
-	Circle(Heart center, double radius);
+	bool isExist;
+
+	Circle(Heart center, double radius, bool isExist = true);
 
 	// calculate point on circle
 	Point point(double angle);
+	string getName(void);
 };
 
 Vector operator + (Vector A, Vector B);
