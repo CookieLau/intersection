@@ -5,8 +5,8 @@
 #include <fstream>
 #include "Shape.h"
 
-#define DLL_OPTION
-// #define DLL_OPTION _declspec(dllexport)
+//#define DLL_OPTION
+#define DLL_OPTION _declspec(dllexport)
 
 class DLL_OPTION Intersection {
 private:
