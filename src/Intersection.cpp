@@ -3,10 +3,10 @@
 
 bool isInLimitation(double num) {
 	if (dcmp(num - 100000) < 0 || dcmp(num + 100000) > 0) {
-		return false;
+		return true;
 	}
 	else {
-		return true;
+		return false;
 	}
 }
 
