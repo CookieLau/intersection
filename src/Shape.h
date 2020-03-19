@@ -18,11 +18,14 @@ using namespace std;
 #define isPrintAllIntersections false
 #define hasResultAfter false
 
+//#define DLL_OPTION
+#define DLL_OPTION _declspec(dllexport)
+
 extern const double eps;
 
 int dcmp(double x);
 
-struct Point {
+struct DLL_OPTION Point {
 	// store one end for line, ray, segment
 	double x, y;
 
@@ -44,7 +47,7 @@ struct Point {
 typedef Point Vector;
 typedef Point Heart;
 
-struct Circle {
+struct DLL_OPTION Circle {
 	Heart center;
 	double radius;
 	bool isExist;

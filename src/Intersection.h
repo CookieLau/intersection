@@ -27,6 +27,14 @@ public:
 	
 	void removeVector(int index);
 	void removeCircle(int index);
+
+	vector<Point> getPoints(void);
+	vector<Vector> getVectors(void);
+	vector<Point> getIntersects(void);
+	vector<Circle> getCircles(void);
+
+	void setVectorNotExist(int index);
+	void setCircleNotExist(int index);
 };
 
 #endif // !INTERSECTION_H

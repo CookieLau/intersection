@@ -235,6 +235,7 @@ void Intersection::solveCircleCircleIntersection() {
 }
 
 int Intersection::solveIntersection() {
+	vector<Point>().swap(intersects);
 	if (points.size() > 1) {
 		solveLineLineIntersection();
 	}
@@ -290,5 +291,27 @@ void Intersection::removeVector(int index) {
 }
 
 void Intersection::removeCircle(int index) {
+	circles[index].isExist = false;
+}
+
+vector<Point> Intersection::getPoints(void) {
+	return points;
+}
+vector<Vector> Intersection::getVectors(void) {
+	return vectors;
+}
+vector<Point> Intersection::getIntersects(void) {
+	return intersects;
+}
+vector<Circle> Intersection::getCircles(void) {
+	return circles;
+}
+
+void Intersection::setVectorNotExist(int index) {
+	points[index].isExist = false;
+	vectors[index].isExist = false;
+}
+
+void Intersection::setCircleNotExist(int index) {
 	circles[index].isExist = false;
 }

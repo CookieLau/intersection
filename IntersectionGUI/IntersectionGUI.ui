@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>600</width>
-    <height>400</height>
+    <width>814</width>
+    <height>509</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,8 +17,8 @@
    <widget class="QPushButton" name="openFileButton">
     <property name="geometry">
      <rect>
-      <x>430</x>
-      <y>10</y>
+      <x>520</x>
+      <y>20</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -30,11 +30,47 @@
    <widget class="QTextBrowser" name="pointNumResult">
     <property name="geometry">
      <rect>
-      <x>370</x>
-      <y>70</y>
-      <width>201</width>
-      <height>41</height>
+      <x>520</x>
+      <y>400</y>
+      <width>251</width>
+      <height>31</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QListWidget" name="allShapes">
+    <property name="geometry">
+     <rect>
+      <x>520</x>
+      <y>60</y>
+      <width>251</width>
+      <height>321</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="getResult">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>20</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>求解</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="deleteShape">
+    <property name="geometry">
+     <rect>
+      <x>680</x>
+      <y>20</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>删除图形</string>
     </property>
    </widget>
   </widget>
@@ -43,7 +79,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>600</width>
+     <width>814</width>
      <height>22</height>
     </rect>
    </property>
