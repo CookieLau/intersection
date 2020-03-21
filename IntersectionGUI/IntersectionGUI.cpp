@@ -1,4 +1,5 @@
 #include <QFileDialog>
+#include <QtCharts>
 #include <fstream>
 #include <map>
 
@@ -13,6 +14,36 @@ IntersectionGUI::IntersectionGUI(QWidget *parent)
 	connect(ui.openFileButton, SIGNAL(clicked()), this, SLOT(openFile()));
 	connect(ui.getResult, SIGNAL(clicked()), this, SLOT(getResult()));
 	connect(ui.deleteShape, SIGNAL(clicked()), this, SLOT(deleteItem()));
+	QSplineSeries* series = new QSplineSeries();
+	series->append(0, 1);
+	series->append(0.707, 0.707);
+	series->append(1, 0);
+	series->append(0.707, -0.707);
+	series->append(0, -1);
+	series->append(-0.707, -0.707);
+	series->append(-1, 0);
+	series->append(-0.707, 0.707);
+	series->append(0, 1);
+
+	QLineSeries* series1 = new QLineSeries();
+	series1->append(0, 1);
+	series1->append(1, 0);
+
+	QScatterSeries* series2 = new QScatterSeries();
+	series2->append(0, 1);
+	series2->append(1, 0);
+
+	QChart* chart = new QChart();
+	chart->addSeries(series);
+	chart->addSeries(series1);
+	chart->addSeries(series2);
+	chart->legend()->hide();
+	chart->createDefaultAxes();
+	chart->axisX()->setRange(-5, 5);
+	chart->axisY()->setRange(-5, 5);
+	//chart->setAxisX(axisX);
+	//chart->setAxisY(axisY);
+	ui.widget->setChart(chart);
 }
 
 void IntersectionGUI::loadShape(QStringList& strList) {
@@ -73,3 +104,4 @@ void IntersectionGUI::deleteItem(void) {
 	}
 	ui.allShapes->takeItem(currenRow);
 }
+

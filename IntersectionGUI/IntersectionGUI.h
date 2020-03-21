@@ -3,9 +3,12 @@
 #include <QtWidgets/QMainWindow>
 #include <map>
 #include <string>
+#include <QtCharts>
 
 #include "ui_IntersectionGUI.h"
 #include "..\src\Intersection.h"
+
+QT_CHARTS_USE_NAMESPACE
 
 class IntersectionGUI : public QMainWindow
 {
