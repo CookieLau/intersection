@@ -1,13 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29905.134
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1022
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "intersection", "intersection\intersection.vcxproj", "{D94CD555-98BB-421C-A14B-AC2DAB7D4D57}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test", "test\test.vcxproj", "{5FE427C2-8F7A-4F19-B0B4-CB6D31957A86}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IntersectionGUI", "IntersectionGUI\IntersectionGUI.vcxproj", "{08933366-B4D6-4702-91DE-A3FAA820AA95}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IntersectionCLI", "IntersectionCLI\IntersectionCLI.vcxproj", "{9D990C69-6E54-4728-B920-C4B357756D1A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "coverageTest", "coverageTest\coverageTest.vcxproj", "{451A2B72-F97B-4D44-ABFF-413581A4ADC1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +43,22 @@ Global
 		{08933366-B4D6-4702-91DE-A3FAA820AA95}.Release|x64.ActiveCfg = Release|Win32
 		{08933366-B4D6-4702-91DE-A3FAA820AA95}.Release|x86.ActiveCfg = Release|Win32
 		{08933366-B4D6-4702-91DE-A3FAA820AA95}.Release|x86.Build.0 = Release|Win32
+		{9D990C69-6E54-4728-B920-C4B357756D1A}.Debug|x64.ActiveCfg = Debug|x64
+		{9D990C69-6E54-4728-B920-C4B357756D1A}.Debug|x64.Build.0 = Debug|x64
+		{9D990C69-6E54-4728-B920-C4B357756D1A}.Debug|x86.ActiveCfg = Debug|Win32
+		{9D990C69-6E54-4728-B920-C4B357756D1A}.Debug|x86.Build.0 = Debug|Win32
+		{9D990C69-6E54-4728-B920-C4B357756D1A}.Release|x64.ActiveCfg = Release|x64
+		{9D990C69-6E54-4728-B920-C4B357756D1A}.Release|x64.Build.0 = Release|x64
+		{9D990C69-6E54-4728-B920-C4B357756D1A}.Release|x86.ActiveCfg = Release|Win32
+		{9D990C69-6E54-4728-B920-C4B357756D1A}.Release|x86.Build.0 = Release|Win32
+		{451A2B72-F97B-4D44-ABFF-413581A4ADC1}.Debug|x64.ActiveCfg = Debug|x64
+		{451A2B72-F97B-4D44-ABFF-413581A4ADC1}.Debug|x64.Build.0 = Debug|x64
+		{451A2B72-F97B-4D44-ABFF-413581A4ADC1}.Debug|x86.ActiveCfg = Debug|Win32
+		{451A2B72-F97B-4D44-ABFF-413581A4ADC1}.Debug|x86.Build.0 = Debug|Win32
+		{451A2B72-F97B-4D44-ABFF-413581A4ADC1}.Release|x64.ActiveCfg = Release|x64
+		{451A2B72-F97B-4D44-ABFF-413581A4ADC1}.Release|x64.Build.0 = Release|x64
+		{451A2B72-F97B-4D44-ABFF-413581A4ADC1}.Release|x86.ActiveCfg = Release|Win32
+		{451A2B72-F97B-4D44-ABFF-413581A4ADC1}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

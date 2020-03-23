@@ -1,9 +1,9 @@
-#include "Shape.h"
+#include "Intersection.h"
 
 const double eps = 1e-12;
 
 // struct Point
-Point::Point(double x, double y, char type, bool isExist) : x(x), y(y), type(type), isExist(isExist) {}
+Point::Point(double x, double y, char type, int index, bool isExist) : x(x), y(y), type(type), index(index), isExist(isExist) {}
 
 bool Point::operator < (const Point& B) const {
 	return (dcmp(x - B.x) < 0 || (dcmp(x - B.x) == 0 && dcmp(y - B.y) < 0));

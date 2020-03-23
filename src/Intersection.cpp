@@ -2,7 +2,7 @@
 #include "Intersection.h"
 
 bool isInLimitation(double num) {
-	if (dcmp(num - 100000) < 0 || dcmp(num + 100000) > 0) {
+	if (dcmp(num - 100000) < 0 && dcmp(num + 100000) > 0) {
 		return true;
 	}
 	else {
@@ -21,29 +21,38 @@ int Intersection::getAllPoints(ifstream& in) {
 		in >> type;
 		if (isLine(type)) {
 			if (!(in >> x1 >> y1 >> x2 >> y2)) {
-				fprintf(stderr, "Value error detected in line %d, there are non-numeric characters.\n", i + 1);
+				throw "在第" + to_string(i + 1) + "行，出现值错误，无法读入";
+				// fprintf(stderr, "Value error detected in line %d, there are non-numeric characters.\n", i + 1);
 			}
 			if (dcmp(x1 - x2) == 0 && dcmp(y1 - y2) == 0) {
-				fprintf(stderr, "Two points for constructing %c are the same in line %d.\n", type, i + 1);
+				throw "在第" + to_string(i + 1) + "行，构成线段、射线或直线的两点重合";
+				// fprintf(stderr, "Two points for constructing %c are the same in line %d.\n", type, i + 1);
 			}
 			if (!(isInLimitation(x1) && isInLimitation(y1) && isInLimitation(x2) && isInLimitation(y2))) {
-				fprintf(stderr, "There are numbers out of range (-100000, 100000) at line %d.\n", i + 1);
+				throw "在第" + to_string(i + 1) + "行，出现超范围的数据";
+				// fprintf(stderr, "There are numbers out of range (-100000, 100000) at line %d.\n", i + 1);
 			}
 			points.push_back(Point(x1, y1, type));
 			vectors.push_back(Point(x2 - x1, y2 - y1, type)); // whole Length
 		}
 		else if (isCircle(type)) {
 			if (!(in >> x1 >> y1 >> radius)) {
-				fprintf(stderr, "Value error detected in line %d, there are non-numeric characters.\n", i + 1);
+				throw "在第" + to_string(i + 1) + "行，出现值错误，无法读入";
+				// fprintf(stderr, "Value error detected in line %d, there are non-numeric characters.\n", i + 1);
 			}
 			if (!(isInLimitation(x1) && isInLimitation(y1) && isInLimitation(radius))) {
-				fprintf(stderr, "There are numbers out of range (-100000, 100000) at line %d.\n", i + 1);
+				throw "在第" + to_string(i + 1) + "行，出现超范围的数据";
+				// fprintf(stderr, "There are numbers out of range (-100000, 100000) at line %d.\n", i + 1);
+			}
+			if (dcmp(radius) <= 0) {
+				throw "在第" + to_string(i + 1) + "行，圆的半径应大于0";
 			}
 			circles.push_back(Circle(Heart(x1, y1, type), radius));
 			// Radius.push_back(radius);
 		}
 		else {
-			fprintf(stderr, "Type error detected in line %d: type:%c\n", i + 1, type);
+			throw "在第" + to_string(i + 1) + "行，出现未识别符号";
+			// fprintf(stderr, "Type error detected in line %d: type:%c\n", i + 1, type);
 			return -1;
 		}
 	}
@@ -68,12 +77,113 @@ void Intersection::solveLineLineIntersection() {
 			double denominator = Cross(v, w);
 			if (dcmp(denominator) == 0) { // parallel case
 				if (dcmp(Cross(u, v)) == 0) {
-					cout << "Warning: There are infinity interactions for two L/R/S, which have been ignored, ";
-					cout << "point 1: (" << points[i].x << "," << points[i].y << ") ";
-					cout << "vector 1: (" << vectors[i].x << "," << vectors[i].y << ") ";
-					cout << "point 2: (" << points[j].x << "," << points[j].y << ") ";
-					cout << "vector 2: (" << vectors[j].x << "," << vectors[j].y << ")" << endl;
+					// 可能重合
+					// 至少有一个是直线
+					if (points[i].type == 'L' || points[j].type == 'L') {
+						throw string("直线与直线或线段重合");
+					}
+					else if (points[i].type == 'R' && points[j].type == 'R') {
+						// 对方向向量进行点乘，如果同向则error
+						double judge = Dot(vectors[i], vectors[j]);
+						if (dcmp(judge) > 0) {
+							throw string("射线与射线重合");
+						}
+						// 不同向，用射线起点组成的向量与其中一个方向向量点乘
+						Point ppv = points[j] - points[i]; // 从i指向j
+						judge = Dot(ppv, vectors[i]);
+						// ppv 与i的方向向量内积
+						if (dcmp(judge) > 0) {
+							throw string("射线与射线重合");
+						}
+						else if (dcmp(judge) == 0) {
+							// 有一个交点，即射线起点
+							intersects.push_back(points[i]);
+						}
+						else {
+							continue;
+						}
+					}
+					else if (points[i].type == 'R' && points[j].type == 'S') {
+						Point rsv0 = points[j] - points[i];
+						Point rsv1 = vectors[j] + points[j] - points[i];
+						double judge0 = Dot(vectors[i], rsv0);
+						double judge1 = Dot(vectors[i], rsv1);
+						if (dcmp(judge0) < 0 && dcmp(judge1) < 0) {
+							continue;
+						}
+						else if ((dcmp(judge0) < 0 && dcmp(judge1) == 0) || (dcmp(judge0) == 0 && dcmp(judge1) < 0)) {
+							// 此时有唯一焦点为射线起点
+							intersects.push_back(points[i]);
+						}
+						else {
+							throw string("射线与线段重合");
+						}
+					}
+					else if (points[i].type == 'S' && points[j].type == 'R') {
+						Point rsv0 = points[i] - points[j];
+						Point rsv1 = vectors[i] + points[i] - points[j];
+						double judge0 = Dot(vectors[j], rsv0);
+						double judge1 = Dot(vectors[j], rsv1);
+						if (dcmp(judge0) < 0 && dcmp(judge1) < 0) {
+							continue;
+						}
+						else if ((dcmp(judge0) < 0 && dcmp(judge1) == 0) || (dcmp(judge0) == 0 && dcmp(judge1) < 0)) {
+							// 此时有唯一焦点为射线起点
+							intersects.push_back(points[j]);
+						}
+						else {
+							throw string("射线与线段重合");
+						}
+					}
+					else if (points[i].type == 'S' && points[j].type == 'S') {
+						Point iSmall = (dcmp(vectors[i].x) > 0) ? points[i] : (points[i] + vectors[i]);
+						Point iLarge = (dcmp(vectors[i].x) > 0) ? (points[i] + vectors[i]) : points[i];
+						Point jSmall = (dcmp(vectors[j].x) > 0) ? points[j] : (points[j] + vectors[j]);
+						Point jLarge = (dcmp(vectors[j].x) > 0) ? (points[j] + vectors[j]) : points[j];
+						if (dcmp(vectors[i].x) == 0) {
+							// 与y轴平行，用纵坐标
+							if (iSmall.y > jLarge.y || jSmall.y > iLarge.y) {
+								continue;
+							}
+							else if (iSmall.y == jLarge.y || jSmall.y == iLarge.y) {
+								// 一个的小等于另一个的大，有一个重合的点
+								if (iSmall.y == jLarge.y) {
+									intersects.push_back(iSmall);
+								}
+								else {
+									intersects.push_back(jSmall);
+								}
+							}
+							else {
+								throw string("线段与线段重合");
+							}
+						}
+						else {
+							// 用横坐标
+							if (iSmall.x > jLarge.x || jSmall.x > iLarge.x) {
+								continue;
+							}
+							else if (iSmall.x == jLarge.x || jSmall.x == iLarge.x) {
+								// 一个的小等于另一个的大，有一个重合的点
+								if (iSmall.x == jLarge.x) {
+									intersects.push_back(iSmall);
+								}
+								else {
+									intersects.push_back(jSmall);
+								}
+							}
+							else {
+								throw string("线段与线段重合");
+							}
+						}
+					}
 				}
+				// LL error /continue
+				// LR error /continue
+				// RR 点乘 同向error 不同向 一个起点与另一个起点的向量与前者方向向量点乘 >0 error =0 +1焦点 <0 continue /continue
+				// RS R起点与S两端点组成两向量 与R方向向量点乘 全为负数 continue 一0一负 +1焦点 其余 error /continue
+				// SS 用x坐标 如果x都相同（平行于y）则用y坐标，对于每一个线段 找x较小坐标和x较大坐标 一个小坐标>另一个大坐标 continue
+				// 如果等（一个小坐标等于另一个大坐标），则+1焦点，否则 error     /continue
 				continue;
 			}
 			double t_i = 1.0 * Cross(w, u) / denominator;
@@ -192,10 +302,7 @@ void Intersection::solveCircleCircleIntersection() {
 			double radius_2 = circles[j].radius;
 
 			if (dcmp(p.x - q.x) == 0 && dcmp(p.y - q.y) == 0 && dcmp(radius_1 - radius_2) == 0) {
-				cout << "Warning: There are same circles which intersections could be infinity, which have been ignored, ";
-				cout << "x: " << p.x << " ";
-				cout << "y: " << p.y << " ";
-				cout << "r: " << radius_1 << endl;
+				throw string("圆和圆重合");
 				continue;
 			}
 

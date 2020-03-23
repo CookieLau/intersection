@@ -1,0 +1,21 @@
+[2020-03-24 02:25:11] [info] Start Program:
+Path:"E:\\Junior2NoSync\\SoftwareEngineering\\03-pairwork\\intersection\\\\bin\\coverageTest.exe"
+Arguments:
+Working directory: "E:\\Junior2NoSync\\SoftwareEngineering\\03-pairwork\\intersection\\coverageTest\\"
+Modules: Selected: E:\Junior2NoSync\SoftwareEngineering\03-pairwork\intersection\bin\intersection.dll E:\Junior2NoSync\SoftwareEngineering\03-pairwork\intersection\bin\test.dll E:\Junior2NoSync\SoftwareEngineering\03-pairwork\intersection\bin\IntersectionGUI.exe E:\Junior2NoSync\SoftwareEngineering\03-pairwork\intersection\bin\IntersectionCLI.exe E:\Junior2NoSync\SoftwareEngineering\03-pairwork\intersection\bin\coverageTest.exe Excluded: 
+Sources: Selected: E:\Junior2NoSync\SoftwareEngineering\03-pairwork\intersection\intersection E:\Junior2NoSync\SoftwareEngineering\03-pairwork\intersection\src E:\Junior2NoSync\SoftwareEngineering\03-pairwork\intersection\bin E:\Junior2NoSync\SoftwareEngineering\03-pairwork\intersection\test E:\Junior2NoSync\SoftwareEngineering\03-pairwork\intersection\bin E:\Junior2NoSync\SoftwareEngineering\03-pairwork\intersection\IntersectionGUI E:\Junior2NoSync\SoftwareEngineering\03-pairwork\intersection\src E:\Junior2NoSync\SoftwareEngineering\03-pairwork\intersection\bin E:\Junior2NoSync\SoftwareEngineering\03-pairwork\intersection\IntersectionCLI E:\Junior2NoSync\SoftwareEngineering\03-pairwork\intersection\src E:\Junior2NoSync\SoftwareEngineering\03-pairwork\intersection\coverageTest Excluded: 
+Log Level: Normal
+Cover Children: 0
+Aggregate by file: 1
+Continue after C++ exception: 0
+Optimized build support: 0
+Export: binary C:\Users\cooki\AppData\Local\Temp\u5dndp5v.wbr 
+Input coverage: 
+Unified diff: 
+Excluded line regular expressions: 
+Substitute pdb source paths: 
+
+[2020-03-24 02:25:11] [info] Module: E:\Junior2NoSync\SoftwareEngineering\03-pairwork\intersection\bin\coverageTest.exe is selected because it matches selected pattern: E:\Junior2NoSync\SoftwareEngineering\03-pairwork\intersection\bin\coverageTest.exe
+[2020-03-24 02:25:12] [info] ----------------------------------------------------
+[2020-03-24 02:25:12] [info] Coverage binary generated in file: C:\Users\cooki\AppData\Local\Temp\u5dndp5v.wbr
+[2020-03-24 02:25:12] [info] ----------------------------------------------------

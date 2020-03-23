@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "CppUnitTest.h"
-#include "../src/Shape.h"
 #include "../src/Intersection.h"
 #include <cmath>
 #include <fstream>
@@ -14,7 +13,7 @@ namespace test
 	public:
 		TEST_METHOD(CC0Test)
 		{
-			ifstream in("../testcase/cc_0.txt");
+			ifstream in("../test/testcase/cc_0.txt");
 			Intersection* intersect = new Intersection();
 			intersect->getAllPoints(in);
 			int ret = intersect->solveIntersection();
@@ -23,7 +22,7 @@ namespace test
 
 		TEST_METHOD(RL0Test)
 		{
-			ifstream in("../testcase/rl_0.txt");
+			ifstream in("../test/testcase/rl_0.txt");
 			Intersection* intersect = new Intersection();
 			intersect->getAllPoints(in);
 			int ret = intersect->solveIntersection();
@@ -32,7 +31,7 @@ namespace test
 
 		TEST_METHOD(SL0Test)
 		{
-			ifstream in("../testcase/sl_0.txt");
+			ifstream in("../test/testcase/sl_0.txt");
 			Intersection* intersect = new Intersection();
 			intersect->getAllPoints(in);
 			int ret = intersect->solveIntersection();
@@ -41,7 +40,7 @@ namespace test
 
 		TEST_METHOD(RSC0Test)
 		{
-			ifstream in("../testcase/rsc_0.txt");
+			ifstream in("../test/testcase/rsc_0.txt");
 			Intersection* intersect = new Intersection();
 			intersect->getAllPoints(in);
 			int ret = intersect->solveIntersection();
@@ -50,7 +49,7 @@ namespace test
 
 		TEST_METHOD(RSLC0Test)
 		{
-			ifstream in("../testcase/rslc_0.txt");
+			ifstream in("../test/testcase/rslc_0.txt");
 			Intersection* intersect = new Intersection();
 			intersect->getAllPoints(in);
 			int ret = intersect->solveIntersection();
@@ -59,7 +58,7 @@ namespace test
 
 		TEST_METHOD(RSL1Test)
 		{
-			ifstream in("../testcase/rsl_1.txt");
+			ifstream in("../test/testcase/rsl_1.txt");
 			Intersection* intersect = new Intersection();
 			intersect->getAllPoints(in);
 			int ret = intersect->solveIntersection();
@@ -68,7 +67,7 @@ namespace test
 
 		TEST_METHOD(RSLC1Test)
 		{
-			ifstream in("../testcase/rslc_1.txt");
+			ifstream in("../test/testcase/rslc_1.txt");
 			Intersection* intersect = new Intersection();
 			intersect->getAllPoints(in);
 			int ret = intersect->solveIntersection();
@@ -77,7 +76,7 @@ namespace test
 
 		TEST_METHOD(LC1Test)
 		{
-			ifstream in("../testcase/lc_1.txt");
+			ifstream in("../test/testcase/lc_1.txt");
 			Intersection* intersect = new Intersection();
 			intersect->getAllPoints(in);
 			int ret = intersect->solveIntersection();
@@ -86,7 +85,7 @@ namespace test
 
 		TEST_METHOD(RSL0Test)
 		{
-			ifstream in("../testcase/rsl_0.txt");
+			ifstream in("../test/testcase/rsl_0.txt");
 			Intersection* intersect = new Intersection();
 			intersect->getAllPoints(in);
 			int ret = intersect->solveIntersection();

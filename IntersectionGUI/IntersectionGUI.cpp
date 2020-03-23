@@ -2,10 +2,11 @@
 #include <QtCharts>
 #include <fstream>
 #include <map>
+#include <QPixmap>
+#include <regex>
 
 #include "IntersectionGUI.h"
-#include "..\src\Intersection.h"
-
+#include "../src/Intersection.h"
 IntersectionGUI::IntersectionGUI(QWidget *parent)
 	: QMainWindow(parent)
 {
@@ -14,42 +15,29 @@ IntersectionGUI::IntersectionGUI(QWidget *parent)
 	connect(ui.openFileButton, SIGNAL(clicked()), this, SLOT(openFile()));
 	connect(ui.getResult, SIGNAL(clicked()), this, SLOT(getResult()));
 	connect(ui.deleteShape, SIGNAL(clicked()), this, SLOT(deleteItem()));
-	connect(ui.draw, SIGNAL(clicked()), this, SLOT(paintItems(ui.canvas)));
-	/*
-	QSplineSeries* series = new QSplineSeries();
-	series->append(0, 1);
-	series->append(0.707, 0.707);
-	series->append(1, 0);
-	series->append(0.707, -0.707);
-	series->append(0, -1);
-	series->append(-0.707, -0.707);
-	series->append(-1, 0);
-	series->append(-0.707, 0.707);
-	series->append(0, 1);
+	connect(ui.zoom_in, SIGNAL(clicked()), this, SLOT(zoom_in()));
+	connect(ui.zoom_out, SIGNAL(clicked()), this, SLOT(zoom_out()));
 
-	QLineSeries* series1 = new QLineSeries();
-	series1->append(0, 1);
-	series1->append(1, 0);
+	QWidget *midShow = ui.centralWidget->findChild<QWidget *>("midShow");
+	showPic = new ShowPic(midShow);
+	showPic->setGeometry(0, 0, midShow->width(), midShow->height());
+	showPic->setOffset(midShow->width() / 2, midShow->height() / 2);
 
-	QScatterSeries* series2 = new QScatterSeries();
-	series2->append(0, 1);
-	series2->append(1, 0);
+}
 
-	QChart* chart = new QChart();
-	chart->addSeries(series);
-	chart->addSeries(series1);
-	chart->addSeries(series2);
-	chart->legend()->hide();
-	chart->createDefaultAxes();
-	chart->axisX()->setRange(-5, 5);
-	chart->axisY()->setRange(-5, 5);
-	//chart->setAxisX(axisX);
-	//chart->setAxisY(axisY);
-	ui.widget->setChart(chart);
-	*/
+void IntersectionGUI::zoom_in(void) {
+	showPic->setScale(1.1);
+	showPic->update();
+}
+
+void IntersectionGUI::zoom_out(void) {
+	showPic->setScale(0.9);
+	showPic->update();
 }
 
 void IntersectionGUI::loadShape(QStringList& strList) {
+	this->getResult();
+	ui.allShapes->clear();
 	vectorNameToIndex.erase(vectorNameToIndex.begin(), vectorNameToIndex.end());
 	circleNameToIndex.erase(circleNameToIndex.begin(), circleNameToIndex.end());
 	int indexCnt = 0;
@@ -58,7 +46,14 @@ void IntersectionGUI::loadShape(QStringList& strList) {
 		if (!item.isExist) {
 			continue;
 		}
-		strList << QString::fromStdString(item.getName());
+		int index = item.index;
+		if (index > intersection->getPoints().size()) {
+			printf("%d %d\n", index, intersection->getPoints().size());
+			return;
+		}
+		auto ppoint = intersection->getPoints().at(index);
+		QString linename = QString("%1(%2,%3,%4,%5)").arg(item.type).arg(ppoint.x).arg(ppoint.y).arg(item.x).arg(item.y);
+		strList << linename;
 		vectorNameToIndex[item.getName()] = indexCnt++;
 	}
 	indexCnt = 0;
@@ -72,6 +67,7 @@ void IntersectionGUI::loadShape(QStringList& strList) {
 }
 
 void IntersectionGUI::openFile(void) {
+	intersection->clearGraph();
 	QString filePath = QFileDialog::getOpenFileName(this, "Open File to Load", "./");
 	QFileInfo fileInfo = QFileInfo(filePath);
 	string file_path = fileInfo.absoluteFilePath().toStdString();
@@ -80,6 +76,8 @@ void IntersectionGUI::openFile(void) {
 	QStringList strList;
 	loadShape(strList);
 	ui.allShapes->addItems(strList);
+	showPic->setIntersection(intersection);
+	showPic->update();
 	// add all names to the <shapeName, int> map
 	// int res = intersection->solveIntersection();
 	// ui.pointNumResult->setText(QString::number(res, 10));
@@ -87,7 +85,7 @@ void IntersectionGUI::openFile(void) {
 
 void IntersectionGUI::getResult(void) {
 	int res = intersection->solveIntersection();
-	ui.pointNumResult->setText(QString::number(res, 10));
+	ui.pointNumResult->setText(QString("Answer:%1").arg(res));
 }
 
 void IntersectionGUI::deleteItem(void) {
@@ -96,91 +94,55 @@ void IntersectionGUI::deleteItem(void) {
 	//QListWidgetItem* item = ui.allShapes->itemAt(pnt);
 	//string text = (item->text()).toStdString();
 	int currenRow = ui.allShapes->currentRow();
-	string text = (ui.allShapes->item(currenRow)->text()).toStdString();
-    if (vectorNameToIndex.find(text) != vectorNameToIndex.end()) {
+	std::string text = (ui.allShapes->item(currenRow)->text()).toStdString();
+	std::smatch sm;
+	if (text[0] != 'C') {
+		std::regex reg("*(*,*,*,*)");
+		if (std::regex_match(text, sm, reg)) {
+			for (int k = 0; k < sm.size(); k++) {
+				std::cout << sm[k] << endl;
+			}
+		}
+	}
+	if (vectorNameToIndex.find(text) != vectorNameToIndex.end()) {
 		int index = vectorNameToIndex[text];
 		intersection->setVectorNotExist(index);
 	}
-	else {
+	else if (circleNameToIndex.find(text) != circleNameToIndex.end()) {
 		int index = circleNameToIndex[text];
 		intersection->setCircleNotExist(index);
 	}
+	else {
+		return;
+	}
 	ui.allShapes->takeItem(currenRow);
+	showPic->setIntersection(intersection);
+	this->getResult();
+	showPic->update();
 }
 
-void IntersectionGUI::paintItems(QPaintEvent *) {
+void IntersectionGUI::wheelEvent(QWheelEvent *event)
+{
+	QPoint pos;
+	QPoint pos1;
+	QPoint pos2;
+	pos1 = mapToGlobal(QPoint(0, 0));
+	pos2 = event->globalPos();
+	pos = pos2 - pos1;
 
-    QPainter painter(this);
-    //painter.setPen(Qt::blue);
-    painter.setPen(Qt::black);
-
-    // 因为是左上角为基准点，所以要加上偏移量
-    double x_offset, y_offset;
-    double multipleSize = 1e9;
-    double x1, y1; // x1, y1 point
-    double v1, v2;
-    double radius;
-    QLineF line;
-    QRectF circle;
-
-    // 画基本图形
-    int type;
-
-    // 遍历基本图形
-	vector<Point> linePoints = intersection->getPoints();
-	vector<Vector> vectors = intersection->getVectors();
-	for (int i = 0; i < linePoints.size(); ++i) {
-		if (!linePoints[i].isExist) {
-			continue;
+	//判断鼠标位置是否在图像显示区域
+	if (pos.x() > showPic->x() && pos.x() < showPic->x() + showPic->width()
+		&& pos.y() > showPic->y() && pos.y() < showPic->y() + showPic->height())
+	{
+		// 当滚轮远离使用者时进行放大，当滚轮向使用者方向旋转时进行缩小
+		if (event->delta() > 0)
+		{
+			zoom_in();
 		}
-		type = linePoints[i].type;
-		x1 = linePoints[i].x;
-		y1 = linePoints[i].y;
-		v1 = vectors[i].x;
-		v2 = vectors[i].y;
-		switch (type) {
-		case 'L':
-			// get x1, x2, v1, x2
-			line.setLine(x_offset + x1 + multipleSize * v1, y_offset - y1 - multipleSize * v2, x_offset + x1 - multipleSize * v1, y_offset - y1 + multipleSize * v1);
-			painter.drawLine(line);
-			break;
-		case 'R':
-			// get x1, x2, v1, x2
-			line.setLine(x_offset + x1 + multipleSize * v1, y_offset - y1 - multipleSize * v2, x_offset + x1, y_offset - y1);
-			painter.drawLine(line);
-			break;
-		case 'S':
-			// get x1, x2, v1, x2
-			line.setLine(x_offset + x1 + v1, y_offset - y1 - v2, x_offset + x1, y_offset - y1);
-			painter.drawLine(line);
-			break;
-		default:
-			break;
+		else
+		{
+			zoom_out();
 		}
 	}
-	for (Circle item : intersection->getCircles()) {
-		if (!item.isExist) {
-			continue;
-		}
-		x1 = item.center.x;
-		y1 = item.center.y;
-		radius = item.radius;
-		circle.setRect(x_offset + x1 - radius, y_offset - y1 - radius, radius, radius);
-		painter.drawRect(circle);
-	}
 
-    // 画交点
-    QPen dotPen;
-    dotPen.setWidth(4);
-    dotPen.setColor(Qt::red);
-    painter.setPen(dotPen);
-
-    // 遍历交点
-	for (Point p : intersection->getIntersects()) {
-		x1 = p.x;
-		y1 = p.y;
-		QPointF  point(x_offset + x1, y_offset - y1);
-		painter.drawPoint(point);
-	}
 }
-
