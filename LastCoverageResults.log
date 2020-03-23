@@ -1,0 +1,22 @@
+[2020-03-23 14:41:25] [info] Start Program:
+Path:"E:\\Junior2NoSync\\SoftwareEngineering\\03-pairwork\\intersection\\x64\\Debug\\intersection.exe"
+Arguments:-i input.txt -o output.txt 
+Working directory: "E:\\Junior2NoSync\\SoftwareEngineering\\03-pairwork\\intersection"
+Modules: Selected: E:\Junior2NoSync\SoftwareEngineering\03-pairwork\intersection\bin\intersection.dll E:\Junior2NoSync\SoftwareEngineering\03-pairwork\intersection\test\Debug\test.dll E:\Junior2NoSync\SoftwareEngineering\03-pairwork\intersection\bin\IntersectionGUI.exe Excluded: 
+Sources: Selected: E:\Junior2NoSync\SoftwareEngineering\03-pairwork\intersection\intersection E:\Junior2NoSync\SoftwareEngineering\03-pairwork\intersection\src E:\Junior2NoSync\SoftwareEngineering\03-pairwork\intersection\test E:\Junior2NoSync\SoftwareEngineering\03-pairwork\intersection\bin E:\Junior2NoSync\SoftwareEngineering\03-pairwork\intersection\IntersectionGUI E:\Junior2NoSync\SoftwareEngineering\03-pairwork\intersection\src Excluded: 
+Log Level: Normal
+Cover Children: 0
+Aggregate by file: 1
+Continue after C++ exception: 0
+Optimized build support: 0
+Export: binary C:\Users\cooki\AppData\Local\Temp\m5wjcscy.iod 
+Input coverage: 
+Unified diff: 
+Excluded line regular expressions: 
+Substitute pdb source paths: 
+
+[2020-03-23 14:41:25] [info] ----------------------------------------------------
+[2020-03-23 14:41:25] [info] Coverage binary generated in file: C:\Users\cooki\AppData\Local\Temp\m5wjcscy.iod
+[2020-03-23 14:41:25] [info] ----------------------------------------------------
+[2020-03-23 14:41:25] [warning] No modules were selected. Please check the values of --modules and --excluded_modules.
+You can try to remove all --modules and --excluded_modules and use --modules=E:\Junior2NoSync\SoftwareEngineering\03-pairwork\intersection\x64\Debug instead.

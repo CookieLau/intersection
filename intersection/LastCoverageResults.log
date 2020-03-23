@@ -1,0 +1,33 @@
+[2020-03-23 14:55:46] [info] Start Program:
+Path:".\\intersection.exe"
+Arguments:
+Working directory: not set.
+Modules: Selected: * Excluded: 
+Sources: Selected: E:\Junior2NoSync\SoftwareEngineering\03-pairwork\intersection\intersection Excluded: 
+Log Level: Normal
+Cover Children: 0
+Aggregate by file: 1
+Continue after C++ exception: 0
+Optimized build support: 0
+Export: html 
+Input coverage: 
+Unified diff: 
+Excluded line regular expressions: 
+Substitute pdb source paths: 
+
+[2020-03-23 14:55:46] [info] Module: E:\Junior2NoSync\SoftwareEngineering\03-pairwork\intersection\intersection\intersection.exe is selected because it matches selected pattern: *
+[2020-03-23 14:55:46] [info] Module: C:\Windows\System32\ntdll.dll is selected because it matches selected pattern: *
+[2020-03-23 14:55:46] [info] Module: C:\Windows\System32\kernel32.dll is selected because it matches selected pattern: *
+[2020-03-23 14:55:46] [info] Module: C:\Windows\System32\KernelBase.dll is selected because it matches selected pattern: *
+[2020-03-23 14:55:46] [info] Module: C:\Windows\System32\apphelp.dll is selected because it matches selected pattern: *
+[2020-03-23 14:55:46] [info] Module: C:\Windows\System32\vcruntime140d.dll is selected because it matches selected pattern: *
+[2020-03-23 14:55:46] [info] Module: C:\Windows\System32\msvcp140d.dll is selected because it matches selected pattern: *
+[2020-03-23 14:55:46] [info] Module: C:\Windows\System32\ucrtbased.dll is selected because it matches selected pattern: *
+[2020-03-23 14:55:46] [info] Module: C:\Windows\System32\kernel.appcore.dll is selected because it matches selected pattern: *
+[2020-03-23 14:55:46] [info] Module: C:\Windows\System32\msvcrt.dll is selected because it matches selected pattern: *
+[2020-03-23 14:55:46] [info] Module: C:\Windows\System32\rpcrt4.dll is selected because it matches selected pattern: *
+[2020-03-23 14:55:46] [info] ----------------------------------------------------
+[2020-03-23 14:55:46] [info] Coverage generated in Folder E:\Junior2NoSync\SoftwareEngineering\03-pairwork\intersection\intersection\CoverageReport-2020-03-23-14h55m46s
+[2020-03-23 14:55:46] [info] ----------------------------------------------------
+[2020-03-23 14:55:46] [warning] No source files were selected. Please check the values of --sources and --excluded_sources.
+You can try to remove all --sources and --excluded_sources and use --sources=e:\junior2nosync\softwareengineering\03-pairwork\intersection\src instead.

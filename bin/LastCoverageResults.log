@@ -1,0 +1,50 @@
+[2020-03-23 16:18:35] [info] Start Program:
+Path:"E:\\Junior2NoSync\\SoftwareEngineering\\03-pairwork\\intersection\\bin\\test.exe"
+Arguments:
+Working directory: "E:\\Junior2NoSync\\SoftwareEngineering\\03-pairwork\\intersection\\bin"
+Modules: Selected: * Excluded: 
+Sources: Selected: * Excluded: 
+Log Level: Normal
+Cover Children: 0
+Aggregate by file: 1
+Continue after C++ exception: 0
+Optimized build support: 0
+Export: binary C:\Users\cooki\AppData\Local\Temp\mvx2p1na.p3e 
+Input coverage: 
+Unified diff: 
+Excluded line regular expressions: 
+Substitute pdb source paths: 
+
+[2020-03-23 16:18:35] [info] Module: E:\Junior2NoSync\SoftwareEngineering\03-pairwork\intersection\bin\test.exe is selected because it matches selected pattern: *
+[2020-03-23 16:18:35] [info] Module: C:\Windows\System32\ntdll.dll is selected because it matches selected pattern: *
+[2020-03-23 16:18:35] [info] Module: C:\Windows\SysWOW64\ntdll.dll is selected because it matches selected pattern: *
+[2020-03-23 16:18:35] [info] Module: C:\Windows\System32\wow64.dll is selected because it matches selected pattern: *
+[2020-03-23 16:18:35] [info] Module: C:\Windows\System32\wow64win.dll is selected because it matches selected pattern: *
+[2020-03-23 16:18:35] [info] Module: C:\Windows\System32\wow64cpu.dll is selected because it matches selected pattern: *
+[2020-03-23 16:18:35] [info] Module: C:\Windows\SysWOW64\kernel32.dll is selected because it matches selected pattern: *
+[2020-03-23 16:18:35] [info] Module: C:\Windows\SysWOW64\KernelBase.dll is selected because it matches selected pattern: *
+[2020-03-23 16:18:35] [info] Module: E:\Junior2NoSync\SoftwareEngineering\03-pairwork\intersection\bin\Microsoft.VisualStudio.TestTools.CppUnitTestFramework.dll is selected because it matches selected pattern: *
+[2020-03-23 16:18:35] [info] Module: C:\Windows\SysWOW64\msvcp140d.dll is selected because it matches selected pattern: *
+[2020-03-23 16:18:35] [info] Module: C:\Windows\SysWOW64\ucrtbase.dll is selected because it matches selected pattern: *
+[2020-03-23 16:18:35] [info] Module: C:\Windows\SysWOW64\ucrtbased.dll is selected because it matches selected pattern: *
+[2020-03-23 16:18:35] [info] Module: C:\Windows\SysWOW64\vcruntime140d.dll is selected because it matches selected pattern: *
+[2020-03-23 16:18:35] [info] Module: C:\Windows\SysWOW64\user32.dll is selected because it matches selected pattern: *
+[2020-03-23 16:18:35] [info] Module: C:\Windows\SysWOW64\vcruntime140.dll is selected because it matches selected pattern: *
+[2020-03-23 16:18:35] [info] Module: C:\Windows\SysWOW64\win32u.dll is selected because it matches selected pattern: *
+[2020-03-23 16:18:35] [info] Module: C:\Windows\SysWOW64\msvcp140.dll is selected because it matches selected pattern: *
+[2020-03-23 16:18:35] [info] Module: C:\Windows\SysWOW64\gdi32.dll is selected because it matches selected pattern: *
+[2020-03-23 16:18:35] [info] Module: C:\Windows\SysWOW64\gdi32full.dll is selected because it matches selected pattern: *
+[2020-03-23 16:18:35] [info] Module: C:\Windows\SysWOW64\msvcp_win.dll is selected because it matches selected pattern: *
+[2020-03-23 16:18:35] [info] Module: C:\Windows\SysWOW64\oleaut32.dll is selected because it matches selected pattern: *
+[2020-03-23 16:18:35] [info] Module: C:\Windows\SysWOW64\combase.dll is selected because it matches selected pattern: *
+[2020-03-23 16:18:35] [info] Module: C:\Windows\SysWOW64\rpcrt4.dll is selected because it matches selected pattern: *
+[2020-03-23 16:18:35] [info] Module: C:\Windows\SysWOW64\sspicli.dll is selected because it matches selected pattern: *
+[2020-03-23 16:18:35] [info] Module: C:\Windows\SysWOW64\cryptbase.dll is selected because it matches selected pattern: *
+[2020-03-23 16:18:35] [info] Module: C:\Windows\SysWOW64\bcryptprimitives.dll is selected because it matches selected pattern: *
+[2020-03-23 16:18:35] [info] Module: C:\Windows\SysWOW64\sechost.dll is selected because it matches selected pattern: *
+[2020-03-23 16:18:35] [info] Module: C:\Windows\SysWOW64\imm32.dll is selected because it matches selected pattern: *
+[2020-03-23 16:18:35] [info] Module: C:\Windows\SysWOW64\kernel.appcore.dll is selected because it matches selected pattern: *
+[2020-03-23 16:18:35] [info] Module: C:\Windows\SysWOW64\msvcrt.dll is selected because it matches selected pattern: *
+[2020-03-23 16:18:35] [info] ----------------------------------------------------
+[2020-03-23 16:18:35] [info] Coverage binary generated in file: C:\Users\cooki\AppData\Local\Temp\mvx2p1na.p3e
+[2020-03-23 16:18:35] [info] ----------------------------------------------------

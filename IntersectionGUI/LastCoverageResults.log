@@ -1,0 +1,23 @@
+[2020-03-22 11:28:39] [info] Start Program:
+Path:"Z:\\Intersection\\bin\\IntersectionGUI.exe"
+Arguments:
+Working directory: "Z:\\Intersection\\IntersectionGUI\\"
+Modules: Selected: Z:\Intersection\bin\intersection.dll Z:\Intersection\test\Debug\test.dll Z:\Intersection\bin\IntersectionGUI.exe Excluded: 
+Sources: Selected: Z:\Intersection\intersection Z:\Intersection\src Z:\Intersection\test Z:\Intersection\bin Z:\Intersection\IntersectionGUI Z:\Intersection\src Excluded: 
+Log Level: Normal
+Cover Children: 0
+Aggregate by file: 1
+Continue after C++ exception: 0
+Optimized build support: 0
+Export: binary C:\Users\yangjiyuan\AppData\Local\Temp\mpzd2edf.ugw 
+Input coverage: 
+Unified diff: 
+Excluded line regular expressions: 
+Substitute pdb source paths: 
+
+[2020-03-22 11:28:40] [info] ----------------------------------------------------
+[2020-03-22 11:28:40] [info] Coverage binary generated in file: C:\Users\yangjiyuan\AppData\Local\Temp\mpzd2edf.ugw
+[2020-03-22 11:28:40] [info] ----------------------------------------------------
+[2020-03-22 11:28:40] [error] Your program stop with error code: -1073741515
+[2020-03-22 11:28:40] [warning] No modules were selected. Please check the values of --modules and --excluded_modules.
+You can try to remove all --modules and --excluded_modules and use --modules=C:\Windows\SysWOW64 instead.
