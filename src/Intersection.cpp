@@ -87,6 +87,7 @@ void Intersection::addItem(char type, double x1, double y1, double x2, double y2
 }
 
 
+
 void Intersection::solveLineLineIntersection() {
 	int i, j, n;
 	Vector u, v, w;
