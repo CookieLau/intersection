@@ -34,4 +34,8 @@ private slots:
 	void zoom_out(void);
 	void zoom_reset(void);
 	void wheelEvent(QWheelEvent *event);
+	void moveLeft(void);
+	void moveRight(void);
+	void moveUp(void);
+	void moveDown(void);
 };

@@ -22,12 +22,17 @@ IntersectionGUI::IntersectionGUI(QWidget *parent)
 	connect(ui.zoom_out, SIGNAL(clicked()), this, SLOT(zoom_out()));
 	connect(ui.addItem, SIGNAL(clicked()), this, SLOT(addItem()));
 	connect(ui.zoom_reset, SIGNAL(clicked()), this, SLOT(zoom_reset()));
+	connect(ui.left, SIGNAL(clicked()), this, SLOT(moveLeft()));
+	connect(ui.right, SIGNAL(clicked()), this, SLOT(moveRight()));
+	connect(ui.up, SIGNAL(clicked()), this, SLOT(moveUp()));
+	connect(ui.down, SIGNAL(clicked()), this, SLOT(moveDown()));
 
 	QWidget *midShow = ui.centralWidget->findChild<QWidget *>("midShow");
 	showPic = new ShowPic(midShow);
 	showPic->setGeometry(0, 0, midShow->width(), midShow->height());
 	showPic->setOffset(midShow->width() / 2, midShow->height() / 2);
-
+	showPic->max_x = midShow->width();
+	showPic->max_y = midShow->height();
 }
 
 void IntersectionGUI::zoom_in(void) {
@@ -41,9 +46,33 @@ void IntersectionGUI::zoom_out(void) {
 }
 
 void IntersectionGUI::zoom_reset(void) {
-	showPic->zoom = 10;
+	showPic->zoom = 20;
+	QWidget *midShow = ui.centralWidget->findChild<QWidget *>("midShow");
+	showPic->setOffset(midShow->width() / 2, midShow->height() / 2);
 	showPic->update();
 }
+
+void IntersectionGUI::moveLeft(void) {
+	showPic->x_offset += 10;
+	showPic->update();
+}
+
+void IntersectionGUI::moveRight(void) {
+	showPic->x_offset -= 10;
+	showPic->update();
+}
+
+void IntersectionGUI::moveUp(void) {
+	showPic->y_offset += 10;
+	showPic->update();
+}
+
+void IntersectionGUI::moveDown(void) {
+	showPic->y_offset -= 10;
+	showPic->update();
+}
+
+
 
 void IntersectionGUI::loadShape(QStringList& strList) {
 	this->getResult();
@@ -157,10 +186,17 @@ void IntersectionGUI::addItem(void) {
 			if (!ok) {
 				return;
 			}
-			intersection->addItem('C', x1, y1, radius, 0);
-			ui.allShapes->addItem(QString("%1(%2,%3,%4)").arg(ttext[0]).arg(x1).arg(y1).arg(radius));
+			try {
+				intersection->addItem('C', x1, y1, radius, 0);
+				ui.allShapes->addItem(QString("%1(%2,%3,%4)").arg(ttext[0]).arg(x1).arg(y1).arg(radius));
+			}
+			catch (std::string msg) {
+				std::cout << "hhhhhhhhhhhhhhhhhhhhhh" << std::endl;
+				//                QMessageBox::critical(0 , "critical message" , QString::fromStdString(msg), QMessageBox::Ok | QMessageBox::Default , QMessageBox::Cancel | QMessageBox::Escape);
+			}
 		}
 	}
+	showPic->setIntersection(intersection);
 	this->getResult();
 }
 

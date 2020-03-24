@@ -7,8 +7,8 @@ ShowPic::ShowPic(QWidget *parent) :QWidget(parent)
 {
 	setAutoFillBackground(true);
 	setPalette(QPalette(Qt::white));
-	intersection = nullptr;
-	zoom = 10;
+	intersection = new Intersection();
+	zoom = 20;
 }
 
 void ShowPic::setIntersection(Intersection *intersection) {
@@ -34,17 +34,75 @@ void ShowPic::paintEvent(QPaintEvent *event) {
 	pp.setStyle(Qt::DotLine);
 	painter.setPen(pp);
 
-	QLineF axis_X(0, y_offset, x_offset * 2, y_offset);
-	QLineF axis_Y(x_offset, 0, x_offset, y_offset * 2);
+	QPen ppoint;
+	ppoint.setWidth(4);
+	ppoint.setColor(Qt::gray);
+
+	QLineF axis_X(-1e3, y_offset, 2e3, y_offset);
+	QLineF axis_Y(x_offset, -1e3, x_offset, 2e3);
 
 	painter.drawLine(axis_X);
 	painter.drawLine(axis_Y);
+
+	painter.setFont(QFont("Arial", 10));
+
+	double x_axisOff = x_offset + 5;
+	int cnt = 0;
+	while (x_axisOff < max_x) {
+		painter.setPen(pp);
+		painter.drawText(QRectF(x_axisOff, y_offset, 50, 50), QString::fromStdString(to_string(cnt)));
+		painter.setPen(ppoint);
+		QPointF ppp(x_axisOff - 5, y_offset);
+		painter.drawPoint(ppp);
+		cnt++;
+		x_axisOff += zoom;
+	}
+
+	cnt = -1;
+	x_axisOff = x_offset + 5 - zoom;
+	while (x_axisOff > 0) {
+		painter.setPen(pp);
+		painter.drawText(QRectF(x_axisOff, y_offset, 50, 50), QString::fromStdString(to_string(cnt)));
+		painter.setPen(ppoint);
+		QPointF ppp(x_axisOff - 5, y_offset);
+		painter.drawPoint(ppp);
+		cnt--;
+		x_axisOff -= zoom;
+	}
+
+	x_axisOff = x_offset + 5;
+	double y_axisOff = y_offset + zoom;
+	cnt = -1;
+	while (y_axisOff < max_y) {
+		painter.setPen(pp);
+		painter.drawText(QRectF(x_axisOff, y_axisOff, 50, 50), QString::fromStdString(to_string(cnt)));
+		painter.setPen(ppoint);
+		QPointF ppp(x_axisOff - 5, y_axisOff);
+		painter.drawPoint(ppp);
+		cnt--;
+		y_axisOff += zoom;
+	}
+
+	y_axisOff = y_offset - zoom;
+	cnt = 1;
+	while (y_axisOff > 0) {
+		painter.setPen(pp);
+		painter.drawText(QRectF(x_axisOff, y_axisOff, 50, 50), QString::fromStdString(to_string(cnt)));
+		painter.setPen(ppoint);
+		QPointF ppp(x_axisOff - 5, y_axisOff);
+		painter.drawPoint(ppp);
+		cnt++;
+		y_axisOff -= zoom;
+	}
+
+
+
 
 	pp.setColor(Qt::black);
 	pp.setStyle(Qt::SolidLine);
 	painter.setPen(pp);
 	// 因为是左上角为基准点，所以要加上偏移量
-	double multipleSize = 1e9;
+	double multipleSize = 1e7;
 	double x1, y1; // x1, y1 point
 	double v1, v2;
 	double radius;
@@ -55,9 +113,6 @@ void ShowPic::paintEvent(QPaintEvent *event) {
 	int type;
 
 	// 遍历基本图形
-	if (intersection == nullptr) {
-		return;
-	}
 	std::vector<Point> linePoints = intersection->getPoints();
 	std::vector<Vector> vectors = intersection->getVectors();
 	for (int i = 0; i < linePoints.size(); ++i) {
