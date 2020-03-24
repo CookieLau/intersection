@@ -1,4 +1,10 @@
-# BUAA2020 软件工程个人实验作业
+# BUAA2020 软件工程结对编程作业
+
+
+
+WARNING：clone 的时候千万要 git clone xxx.git --depth=1 否则commit的历史非常大
+
+
 
 
 |项目|	内容|
