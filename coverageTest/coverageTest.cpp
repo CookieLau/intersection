@@ -173,7 +173,6 @@ int main() {
 		ifstream in22("../test/errortestcase/1.txt");
 
 		intersect->getAllPoints(in22);
-		assertEqual(true, false);
 	}
 	catch (string msg) {
 		assertEqual(string("在第1行，构成线段、射线或直线的两点重合"), msg);
@@ -184,7 +183,6 @@ int main() {
 		ifstream in23("../test/errortestcase/2.txt");
 
 		intersect->getAllPoints(in23);
-		assertEqual(true, false);
 	}
 	catch (string msg) {
 		assertEqual(string("在第1行，出现超范围的数据"), msg);
@@ -195,7 +193,6 @@ int main() {
 		ifstream in24("../test/errortestcase/3.txt");
 
 		intersect->getAllPoints(in24);
-		assertEqual(true, false);
 	}
 	catch (string msg) {
 		assertEqual(string("在第1行，出现值错误，无法读入"), msg);
@@ -207,7 +204,6 @@ int main() {
 
 		intersect->getAllPoints(in25);
 		intersect->solveIntersection();
-		assertEqual(true, false);
 	}
 	catch (string msg) {
 		assertEqual(string("直线与直线或线段重合"), msg);
@@ -219,7 +215,6 @@ int main() {
 
 		intersect->getAllPoints(in26);
 		intersect->solveIntersection();
-		assertEqual(true, false);
 	}
 	catch (string msg) {
 		assertEqual(string("直线与直线或线段重合"), msg);
@@ -249,7 +244,6 @@ int main() {
 		assertEqual(1, ret);
 	}
 	catch (string msg) {
-		assertEqual(true, false);
 		assertEqual(string("直线与直线或线段重合"), msg);
 	}
 	intersect->clearGraph();
@@ -497,31 +491,7 @@ int main() {
 	intersect->clearGraph();
 
 
-	try {
-		intersect->addItem('C', 10, -99999, 1000000, -1);
-	}
-	catch (string msg) {
-		assertEqual(msg, "出现超范围的数据");
-	}
 
-	try {
-		intersect->addItem('L', 0, 1, 0, 1);
-	}
-	catch (string msg) {
-		assertEqual(msg, "构成线段、射线或直线的两点重合");
-	}
-	try {
-		intersect->addItem('C', 0, 1, -10, -1);
-	}
-	catch (string msg) {
-		assertEqual(msg, "圆的半径应大于0");
-	}
-	try {
-		intersect->addItem('S', 0, 99999, 100001, -10);
-	}
-	catch (string msg) {
-		assertEqual(msg, "出现超范围的数据");
-	}
 
 	cout << "Complete Testing..." << endl;
 	return 0;
