@@ -1,7 +1,7 @@
 #include "ShowPic.h"
 #include <QWidget>
 #include <QPainter>
-#include "../src/Intersection.h"
+#include "../intersection/Intersection.h"
 
 ShowPic::ShowPic(QWidget *parent) :QWidget(parent)
 {
@@ -73,7 +73,7 @@ void ShowPic::paintEvent(QPaintEvent *event) {
 		switch (type) {
 		case 'L':
 			// get x1, x2, v1, x2
-			line.setLine(x_offset + (x1 + multipleSize * v1)*zoom, y_offset - (y1 + multipleSize * v2)*zoom, x_offset + (x1 - multipleSize * v1)*zoom, y_offset - (y1 - multipleSize * v1)*zoom);
+			line.setLine(x_offset + (x1 + multipleSize * v1)*zoom, y_offset - (y1 + multipleSize * v2)*zoom, x_offset + (x1 - multipleSize * v1)*zoom, y_offset - (y1 - multipleSize * v2)*zoom);
 			painter.drawLine(line);
 			break;
 		case 'R':

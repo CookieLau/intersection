@@ -4,9 +4,12 @@
 #include <map>
 #include <QPixmap>
 #include <regex>
+#include <vector>
+#include <iostream>
+#include <qinputdialog.h>
 
 #include "IntersectionGUI.h"
-#include "../src/Intersection.h"
+#include "../intersection/Intersection.h"
 IntersectionGUI::IntersectionGUI(QWidget *parent)
 	: QMainWindow(parent)
 {
@@ -17,6 +20,8 @@ IntersectionGUI::IntersectionGUI(QWidget *parent)
 	connect(ui.deleteShape, SIGNAL(clicked()), this, SLOT(deleteItem()));
 	connect(ui.zoom_in, SIGNAL(clicked()), this, SLOT(zoom_in()));
 	connect(ui.zoom_out, SIGNAL(clicked()), this, SLOT(zoom_out()));
+	connect(ui.addItem, SIGNAL(clicked()), this, SLOT(addItem()));
+	connect(ui.zoom_reset, SIGNAL(clicked()), this, SLOT(zoom_reset()));
 
 	QWidget *midShow = ui.centralWidget->findChild<QWidget *>("midShow");
 	showPic = new ShowPic(midShow);
@@ -35,6 +40,11 @@ void IntersectionGUI::zoom_out(void) {
 	showPic->update();
 }
 
+void IntersectionGUI::zoom_reset(void) {
+	showPic->zoom = 10;
+	showPic->update();
+}
+
 void IntersectionGUI::loadShape(QStringList& strList) {
 	this->getResult();
 	ui.allShapes->clear();
@@ -44,21 +54,24 @@ void IntersectionGUI::loadShape(QStringList& strList) {
 	// int test = intersection->getVectors().size();
 	for (auto item : intersection->getVectors()) {
 		if (!item.isExist) {
+			indexCnt++;
 			continue;
 		}
 		int index = item.index;
 		if (index > intersection->getPoints().size()) {
-			printf("%d %d\n", index, intersection->getPoints().size());
+			printf("index:%d size:%d\n", index, intersection->getPoints().size());
 			return;
 		}
 		auto ppoint = intersection->getPoints().at(index);
-		QString linename = QString("%1(%2,%3,%4,%5)").arg(item.type).arg(ppoint.x).arg(ppoint.y).arg(item.x).arg(item.y);
+		QString linename = QString("%1(%2,%3,%4,%5)").arg(item.type).arg(ppoint.x).arg(ppoint.y).arg(ppoint.x + item.x).arg(ppoint.y + item.y);
+		std::cout << linename.toStdString() << std::endl;
 		strList << linename;
-		vectorNameToIndex[item.getName()] = indexCnt++;
+		vectorNameToIndex[linename.toStdString()] = indexCnt++;
 	}
 	indexCnt = 0;
 	for (auto item : intersection->getCircles()) {
 		if (!item.isExist) {
+			indexCnt++;
 			continue;
 		}
 		strList << QString::fromStdString(item.getName());
@@ -86,6 +99,69 @@ void IntersectionGUI::openFile(void) {
 void IntersectionGUI::getResult(void) {
 	int res = intersection->solveIntersection();
 	ui.pointNumResult->setText(QString("Answer:%1").arg(res));
+	vector<Point> inters = intersection->getIntersects();
+	ui.allIntersects->clear();
+	for (auto p : inters) {
+		ui.allIntersects->addItem(QString("(%1,%2)").arg(p.x).arg(p.y));
+	}
+}
+
+void IntersectionGUI::addItem(void) {
+	QStringList items;//ComboBox控件的内容
+	items << QStringLiteral("Circle") << QStringLiteral("Line") << QStringLiteral("Ray") << QStringLiteral("Segments");
+	QString dlgTitle = QStringLiteral("New figure: ");//对话框标题
+	QString txtLabel = QStringLiteral("Choose a new one: ");//对话框Label显示内容
+	int curIndex = 0;//ComboBox控件默认哪个索引的内容
+	bool editable = true;//ComboBox控件内容是否可被编辑
+	bool ok = false;
+	QString text = QInputDialog::getItem(this, dlgTitle, txtLabel, items, curIndex, editable, &ok);
+	if (ok && !text.isEmpty()) {
+		std::cout << text.toStdString() << endl;
+		std::string ttext = text.toStdString();
+		ok = false;
+		if (ttext != "Circle") {
+			int x1 = QInputDialog::getInt(this, "X1:", "", 0, -99999, 99999, 1, &ok);
+			if (!ok) {
+				return;
+			}
+			ok = false;
+			int y1 = QInputDialog::getInt(this, "y1:", "", 0, -99999, 99999, 1, &ok);
+			if (!ok) {
+				return;
+			}
+			ok = false;
+			int x2 = QInputDialog::getInt(this, "X2:", "", 0, -99999, 99999, 1, &ok);
+			if (!ok) {
+				return;
+			}
+			ok = false;
+			int y2 = QInputDialog::getInt(this, "y2:", "", 0, -99999, 99999, 1, &ok);
+			if (!ok) {
+				return;
+			}
+			intersection->addItem(ttext[0], x1, y1, x2, y2);
+			ui.allShapes->addItem(QString("%1(%2,%3,%4,%5)").arg(ttext[0]).arg(x1).arg(y1).arg(x2 - x1).arg(y2 - y1));
+		}
+		else {
+			int x1 = QInputDialog::getInt(this, "X1:", "", 0, -99999, 99999, 1, &ok);
+			if (!ok) {
+				return;
+			}
+			ok = false;
+			int y1 = QInputDialog::getInt(this, "y1:", "", 0, -99999, 99999, 1, &ok);
+			if (!ok) {
+				return;
+			}
+			ok = false;
+			int radius = QInputDialog::getInt(this, "radius:", "", 0, -99999, 99999, 1, &ok);
+			if (!ok) {
+				return;
+			}
+			intersection->addItem('C', x1, y1, radius, 0);
+			ui.allShapes->addItem(QString("%1(%2,%3,%4)").arg(ttext[0]).arg(x1).arg(y1).arg(radius));
+		}
+	}
+	this->getResult();
 }
 
 void IntersectionGUI::deleteItem(void) {
@@ -95,15 +171,7 @@ void IntersectionGUI::deleteItem(void) {
 	//string text = (item->text()).toStdString();
 	int currenRow = ui.allShapes->currentRow();
 	std::string text = (ui.allShapes->item(currenRow)->text()).toStdString();
-	std::smatch sm;
-	if (text[0] != 'C') {
-		std::regex reg("*(*,*,*,*)");
-		if (std::regex_match(text, sm, reg)) {
-			for (int k = 0; k < sm.size(); k++) {
-				std::cout << sm[k] << endl;
-			}
-		}
-	}
+	std::cout << text << endl;
 	if (vectorNameToIndex.find(text) != vectorNameToIndex.end()) {
 		int index = vectorNameToIndex[text];
 		intersection->setVectorNotExist(index);
