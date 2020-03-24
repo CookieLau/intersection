@@ -19,6 +19,12 @@ int main() {
 	intersect->getAllPoints(in0);
 	int ret = intersect->solveIntersection();
 	assertEqual(ret, 23);
+	intersect->addItem('C', 10, 10, 10, -1);
+	Circle c0 = Circle(Point(0, 1), 1);
+	Circle c1 = Circle(Point(1, 0), 1);
+	double res = CalculateAngle(c0, c1);
+	assertEqual(dcmp(res - atan(1)), 0); // pi / 4
+
 	intersect->clearGraph();
 
 	ifstream in1("../test/testcase/rl_0.txt");
@@ -161,6 +167,7 @@ int main() {
 	catch (string msg) {
 		assertEqual(string("在第2行，出现未识别符号"), msg);
 	}
+	intersect->clearGraph();
 
 	try {
 		ifstream in22("../test/errortestcase/1.txt");
@@ -171,6 +178,7 @@ int main() {
 	catch (string msg) {
 		assertEqual(string("在第1行，构成线段、射线或直线的两点重合"), msg);
 	}
+	intersect->clearGraph();
 
 	try {
 		ifstream in23("../test/errortestcase/2.txt");
@@ -181,6 +189,7 @@ int main() {
 	catch (string msg) {
 		assertEqual(string("在第1行，出现超范围的数据"), msg);
 	}
+	intersect->clearGraph();
 
 	try {
 		ifstream in24("../test/errortestcase/3.txt");
@@ -191,6 +200,7 @@ int main() {
 	catch (string msg) {
 		assertEqual(string("在第1行，出现值错误，无法读入"), msg);
 	}
+	intersect->clearGraph();
 
 	try {
 		ifstream in25("../test/errortestcase/5.txt");
@@ -202,6 +212,7 @@ int main() {
 	catch (string msg) {
 		assertEqual(string("直线与直线或线段重合"), msg);
 	}
+	intersect->clearGraph();
 
 	try {
 		ifstream in26("../test/errortestcase/6.txt");
@@ -213,6 +224,7 @@ int main() {
 	catch (string msg) {
 		assertEqual(string("直线与直线或线段重合"), msg);
 	}
+	intersect->clearGraph();
 
 
 
@@ -220,206 +232,295 @@ int main() {
 		ifstream in27("../test/errortestcase/7.txt");
 
 		intersect->getAllPoints(in27);
-		int ret = intersect->solveIntersection();
+		ret = intersect->solveIntersection();
 		assertEqual(ret, 0);
 	}
 	catch (string msg) {
 		assertEqual(true, false);
 		assertEqual(string("直线与直线或线段重合"), msg);
 	}
+	intersect->clearGraph();
 
 	try {
 		ifstream in28("../test/errortestcase/8.txt");
 
 		intersect->getAllPoints(in28);
-		int ret = intersect->solveIntersection();
+		ret = intersect->solveIntersection();
 		assertEqual(1, ret);
 	}
 	catch (string msg) {
 		assertEqual(true, false);
 		assertEqual(string("直线与直线或线段重合"), msg);
 	}
+	intersect->clearGraph();
 
 	try {
 		ifstream in29("../test/errortestcase/9.txt");
 
 		intersect->getAllPoints(in29);
-		int ret = intersect->solveIntersection();
+		ret = intersect->solveIntersection();
 		assertEqual(1, 2);
 	}
 	catch (string msg) {
 		assertEqual(string("射线与射线重合"), msg);
 	}
+	intersect->clearGraph();
 
 	try {
 		ifstream in30("../test/errortestcase/10.txt");
 
 		intersect->getAllPoints(in30);
-		int ret = intersect->solveIntersection();
+		ret = intersect->solveIntersection();
 		assertEqual(1, 2);
 	}
 	catch (string msg) {
 		assertEqual(string("射线与射线重合"), msg);
 	}
+	intersect->clearGraph();
 
 	try {
 		ifstream in31("../test/errortestcase/11.txt");
 
 		intersect->getAllPoints(in31);
-		int ret = intersect->solveIntersection();
+		ret = intersect->solveIntersection();
 		assertEqual(1, ret);
 	}
 	catch (string msg) {
 		assertEqual(true, false);
 		assertEqual(string("射线与射线重合"), msg);
 	}
+	intersect->clearGraph();
 
 	try {
 		ifstream in32("../test/errortestcase/12.txt");
 
 		intersect->getAllPoints(in32);
-		int ret = intersect->solveIntersection();
+		ret = intersect->solveIntersection();
 		assertEqual(0, ret);
 	}
 	catch (string msg) {
 		assertEqual(true, false);
 		assertEqual(string("射线与射线重合"), msg);
 	}
+	intersect->clearGraph();
 
 	try {
 		ifstream in33("../test/errortestcase/12.txt");
 
 		intersect->getAllPoints(in33);
-		int ret = intersect->solveIntersection();
+		ret = intersect->solveIntersection();
 		assertEqual(0, ret);
 	}
 	catch (string msg) {
 		assertEqual(true, false);
 		assertEqual(string("射线与射线重合"), msg);
 	}
+	intersect->clearGraph();
 
 	try {
 		ifstream in34("../test/errortestcase/13.txt");
 
 		intersect->getAllPoints(in34);
-		int ret = intersect->solveIntersection();
+		ret = intersect->solveIntersection();
 		assertEqual(0, 1);
 	}
 	catch (string msg) {
 		assertEqual(string("射线与线段重合"), msg);
 	}
+	intersect->clearGraph();
 
 	try {
 		ifstream in35("../test/errortestcase/14.txt");
 
 		intersect->getAllPoints(in35);
-		int ret = intersect->solveIntersection();
+		ret = intersect->solveIntersection();
 		assertEqual(0, 1);
 	}
 	catch (string msg) {
 		assertEqual(string("射线与线段重合"), msg);
 	}
+	intersect->clearGraph();
 
 	try {
 		ifstream in36("../test/errortestcase/15.txt");
 
 		intersect->getAllPoints(in36);
-		int ret = intersect->solveIntersection();
+		ret = intersect->solveIntersection();
 		assertEqual(ret, 1);
 	}
 	catch (string msg) {
 		assertEqual(true, false);
 		assertEqual(string("射线与线段重合"), msg);
 	}
+	intersect->clearGraph();
 
 	try {
 		ifstream in37("../test/errortestcase/16.txt");
 
 		intersect->getAllPoints(in37);
-		int ret = intersect->solveIntersection();
+		ret = intersect->solveIntersection();
 		assertEqual(2, 1);
 	}
 	catch (string msg) {
 		assertEqual(string("线段与线段重合"), msg);
 	}
+	intersect->clearGraph();
 
 	try {
 		ifstream in38("../test/errortestcase/17.txt");
 
 		intersect->getAllPoints(in38);
-		int ret = intersect->solveIntersection();
+		ret = intersect->solveIntersection();
 		assertEqual(0, ret);
 	}
 	catch (string msg) {
 		assertEqual(true, false);
 		assertEqual(string("线段与线段重合"), msg);
 	}
+	intersect->clearGraph();
 
 	try {
 		ifstream in39("../test/errortestcase/18.txt");
 
 		intersect->getAllPoints(in39);
-		int ret = intersect->solveIntersection();
+		ret = intersect->solveIntersection();
 		assertEqual(true, false);
 	}
 	catch (string msg) {
 		assertEqual(string("线段与线段重合"), msg);
 	}
+	intersect->clearGraph();
 
 	try {
 		ifstream in40("../test/errortestcase/19.txt");
 
 		intersect->getAllPoints(in40);
-		int ret = intersect->solveIntersection();
+		ret = intersect->solveIntersection();
 		assertEqual(0, ret);
 	}
 	catch (string msg) {
 		assertEqual(true, false);
 	}
+	intersect->clearGraph();
 
 	try {
 		ifstream in41("../test/errortestcase/20.txt");
 
 		intersect->getAllPoints(in41);
-		int ret = intersect->solveIntersection();
+		ret = intersect->solveIntersection();
 		assertEqual(1, ret);
 	}
 	catch (string msg) {
 		assertEqual(true, false);
 	}
+	intersect->clearGraph();
 
 	try {
 		ifstream in42("../test/errortestcase/21.txt");
 
 		intersect->getAllPoints(in42);
-		int ret = intersect->solveIntersection();
+		ret = intersect->solveIntersection();
 		assertEqual(0, ret);
 	}
 	catch (string msg) {
 		assertEqual(true, false);
 	}
+	intersect->clearGraph();
 
 	try {
 		ifstream in43("../test/errortestcase/22.txt");
 
 		intersect->getAllPoints(in43);
-		int ret = intersect->solveIntersection();
+		ret = intersect->solveIntersection();
 		assertEqual(1, ret);
 	}
 	catch (string msg) {
 		assertEqual(true, false);
 	}
+	intersect->clearGraph();
 
 	try {
 		ifstream in44("../test/errortestcase/23.txt");
 
 		intersect->getAllPoints(in44);
-		int ret = intersect->solveIntersection();
+		ret = intersect->solveIntersection();
 		assertEqual(true, false);
 	}
 	catch (string msg) {
-		assertEqual(true, false);
 		assertEqual(string("射线与线段重合"), msg);
+	}
+	intersect->clearGraph();
+
+	try {
+		ifstream in45("../test/errortestcase/24.txt");
+		intersect->getAllPoints(in45);
+		ret = intersect->solveIntersection();
+		assertEqual(true, false);
+	}
+	catch (string msg) {
+		assertEqual(string("射线与线段重合"), msg);
+	}
+	intersect->clearGraph();
+
+	ifstream in46("../test/testcase/rs_1.txt");
+	intersect->getAllPoints(in46);
+	ret = intersect->solveIntersection();
+	assertEqual(ret, 0);
+	intersect->clearGraph();
+
+	ifstream in47("../test/testcase/rs_2.txt");
+	intersect->getAllPoints(in47);
+	ret = intersect->solveIntersection();
+	assertEqual(ret, 0);
+	intersect->clearGraph();
+
+	try {
+		ifstream in48("../test/errortestcase/25.txt");
+		intersect->getAllPoints(in48);
+		ret = intersect->solveIntersection();
+		assertEqual(true, false);
+	}
+	catch (string msg) {
+		assertEqual(string("射线与线段重合"), msg);
+	}
+	intersect->clearGraph();
+
+	try {
+		ifstream in49("../test/errortestcase/26.txt");
+		intersect->getAllPoints(in49);
+		ret = intersect->solveIntersection();
+		assertEqual(true, false);
+	}
+	catch (string msg) {
+		assertEqual(string("圆和圆重合"), msg);
+	}
+	intersect->clearGraph();
+
+
+	try {
+		intersect->addItem('C', 10, -99999, 1000000, -1);
+	}
+	catch (string msg) {
+		assertEqual(msg, "出现超范围的数据");
+	}
+
+	try {
+		intersect->addItem('L', 0, 1, 0, 1);
+	}
+	catch (string msg) {
+		assertEqual(msg, "构成线段、射线或直线的两点重合");
+	}
+	try {
+		intersect->addItem('C', 0, 1, -10, -1);
+	}
+	catch (string msg) {
+		assertEqual(msg, "圆的半径应大于0");
+	}
+	try {
+		intersect->addItem('S', 0, 99999, 100001, -10);
+	}
+	catch (string msg) {
+		assertEqual(msg, "出现超范围的数据");
 	}
 
 	cout << "Complete Testing..." << endl;

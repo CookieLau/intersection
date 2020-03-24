@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>848</width>
-    <height>509</height>
+    <width>1054</width>
+    <height>520</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,8 +17,8 @@
    <widget class="QPushButton" name="openFileButton">
     <property name="geometry">
      <rect>
-      <x>520</x>
-      <y>20</y>
+      <x>80</x>
+      <y>430</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -30,9 +30,9 @@
    <widget class="QTextBrowser" name="pointNumResult">
     <property name="geometry">
      <rect>
-      <x>520</x>
-      <y>400</y>
-      <width>251</width>
+      <x>790</x>
+      <y>390</y>
+      <width>231</width>
       <height>31</height>
      </rect>
     </property>
@@ -47,9 +47,9 @@ p, li { white-space: pre-wrap; }
    <widget class="QListWidget" name="allShapes">
     <property name="geometry">
      <rect>
-      <x>520</x>
+      <x>530</x>
       <y>60</y>
-      <width>251</width>
+      <width>241</width>
       <height>321</height>
      </rect>
     </property>
@@ -57,8 +57,8 @@ p, li { white-space: pre-wrap; }
    <widget class="QPushButton" name="getResult">
     <property name="geometry">
      <rect>
-      <x>610</x>
-      <y>20</y>
+      <x>160</x>
+      <y>430</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -70,8 +70,8 @@ p, li { white-space: pre-wrap; }
    <widget class="QPushButton" name="deleteShape">
     <property name="geometry">
      <rect>
-      <x>700</x>
-      <y>20</y>
+      <x>240</x>
+      <y>430</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -86,7 +86,7 @@ p, li { white-space: pre-wrap; }
       <x>19</x>
       <y>39</y>
       <width>481</width>
-      <height>381</height>
+      <height>361</height>
      </rect>
     </property>
    </widget>
@@ -116,13 +116,144 @@ p, li { white-space: pre-wrap; }
      <string>-</string>
     </property>
    </widget>
+   <widget class="QListWidget" name="allIntersects">
+    <property name="geometry">
+     <rect>
+      <x>790</x>
+      <y>60</y>
+      <width>231</width>
+      <height>321</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="intersects">
+    <property name="geometry">
+     <rect>
+      <x>800</x>
+      <y>40</y>
+      <width>71</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>交点：</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>530</x>
+      <y>40</y>
+      <width>81</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>当前图形：</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="addItem">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>430</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>新添图形</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="zoom_reset">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>10</y>
+      <width>71</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Reset</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="left">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>190</y>
+      <width>21</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>←</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="right">
+    <property name="geometry">
+     <rect>
+      <x>500</x>
+      <y>190</y>
+      <width>21</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>→</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="up">
+    <property name="geometry">
+     <rect>
+      <x>220</x>
+      <y>20</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>↑</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="down">
+    <property name="geometry">
+     <rect>
+      <x>220</x>
+      <y>400</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>↓</string>
+    </property>
+   </widget>
+   <zorder>openFileButton</zorder>
+   <zorder>pointNumResult</zorder>
+   <zorder>allShapes</zorder>
+   <zorder>deleteShape</zorder>
+   <zorder>midShow</zorder>
+   <zorder>zoom_in</zorder>
+   <zorder>zoom_out</zorder>
+   <zorder>allIntersects</zorder>
+   <zorder>intersects</zorder>
+   <zorder>getResult</zorder>
+   <zorder>label</zorder>
+   <zorder>addItem</zorder>
+   <zorder>zoom_reset</zorder>
+   <zorder>left</zorder>
+   <zorder>right</zorder>
+   <zorder>up</zorder>
+   <zorder>down</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>848</width>
+     <width>1054</width>
      <height>23</height>
     </rect>
    </property>

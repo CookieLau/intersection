@@ -1,4 +1,4 @@
-#include <QFileDialog>
+﻿#include <QFileDialog>
 #include <QtCharts>
 #include <fstream>
 #include <map>
