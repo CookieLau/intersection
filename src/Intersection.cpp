@@ -32,8 +32,9 @@ int Intersection::getAllPoints(ifstream& in) {
 				throw "在第" + to_string(i + 1) + "行，出现超范围的数据";
 				// fprintf(stderr, "There are numbers out of range (-100000, 100000) at line %d.\n", i + 1);
 			}
-			points.push_back(Point(x1, y1, type));
-			vectors.push_back(Point(x2 - x1, y2 - y1, type)); // whole Length
+			int index = points.size();
+			points.push_back(Point(x1, y1, type, index));
+			vectors.push_back(Point(x2 - x1, y2 - y1, type, index)); // whole Length
 		}
 		else if (isCircle(type)) {
 			if (!(in >> x1 >> y1 >> radius)) {
@@ -58,6 +59,33 @@ int Intersection::getAllPoints(ifstream& in) {
 	}
 	return 0;
 }
+
+void Intersection::addItem(char type, double x1, double y1, double x2, double y2) {
+	if (type == 'C') {
+		if (!(isInLimitation(x1) && isInLimitation(y1) && isInLimitation(x2))) {
+			throw "出现超范围的数据";
+			// fprintf(stderr, "There are numbers out of range (-100000, 100000) at line %d.\n", i + 1);
+		}
+		if (dcmp(x2) <= 0) {
+			throw "圆的半径应大于0";
+		}
+		circles.push_back(Circle(Heart(x1, y1, type), x2));
+	}
+	else {
+		if (dcmp(x1 - x2) == 0 && dcmp(y1 - y2) == 0) {
+			throw "构成线段、射线或直线的两点重合";
+			// fprintf(stderr, "Two points for constructing %c are the same in line %d.\n", type, i + 1);
+		}
+		if (!(isInLimitation(x1) && isInLimitation(y1) && isInLimitation(x2) && isInLimitation(y2))) {
+			throw "出现超范围的数据";
+			// fprintf(stderr, "There are numbers out of range (-100000, 100000) at line %d.\n", i + 1);
+		}
+		int index = points.size();
+		points.push_back(Point(x1, y1, type, index));
+		vectors.push_back(Point(x2 - x1, y2 - y1, type, index)); // whole Length
+	}
+}
+
 
 void Intersection::solveLineLineIntersection() {
 	int i, j, n;

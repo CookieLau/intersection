@@ -78,7 +78,9 @@ public:
 	void solveLineCircleIntersection();
 	void solveCircleCircleIntersection();
 	int solveIntersection();
-	//void printAllIntersections();
+	void printAllIntersections();
+	void printAllPoints(vector<Point> v);
+	void addItem(char type, double a, double b, double c, double d);
 
 	void removeVector(int index);
 	void removeCircle(int index);
