@@ -6,7 +6,7 @@
 #include <QtCharts>
 
 #include "ui_IntersectionGUI.h"
-#include "../src/Intersection.h"
+#include "../intersection/Intersection.h"
 #include "ShowPic.h"
 
 QT_CHARTS_USE_NAMESPACE
@@ -29,7 +29,9 @@ private slots:
 	void loadShape(QStringList& strList);
 	void getResult(void);
 	void deleteItem(void);
+	void addItem(void);
 	void zoom_in(void);
 	void zoom_out(void);
+	void zoom_reset(void);
 	void wheelEvent(QWheelEvent *event);
 };
