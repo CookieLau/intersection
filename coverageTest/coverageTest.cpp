@@ -1,5 +1,5 @@
 ﻿#include <iostream>
-#include "../src/Intersection.h"  
+#include "../intersection/Intersection.h"  
 
 #define assertEqual(given, expected) do {\
 		if (given != expected) {\

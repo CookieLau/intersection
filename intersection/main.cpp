@@ -1,5 +1,5 @@
 #include <fstream>
-#include "..\src\Intersection.h"
+#include "..\intersection\Intersection.h"
 
 
 int main(int argc, const char** argv) {
